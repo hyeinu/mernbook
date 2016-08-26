@@ -29,6 +29,12 @@ const API = {
     axios.get('/api/users/logout')
       .then(ServerActions.removeProfile)
       .catch(console.error)
+  },
+  editProf(newProf){
+    axios.put('/api/users/profile', newProf)
+      .then(res => res.data)
+      .then(ServerActions.receiveProfile)
+      .catch(console.error)
   }
 }
 

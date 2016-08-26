@@ -16,9 +16,6 @@ export default class RegisterForm extends Component {
   _onInputChange(e){
     let key = e.target.dataset.statekey;
     let value = e.target.value
-    // let newState = {};
-    // newState[key] = value
-    // this.setState(newState)
     this.setState({[key]: value})
   }
   _submit(e){

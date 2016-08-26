@@ -1,11 +1,15 @@
 {
-  "name": "mern-todo",
+  "name": "social-media",
   "version": "1.0.0",
   "description": "",
   "main": "server/app.js",
   "scripts": {
     "start": "node server/app.js",
+    "postinstall": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "6.3.1"
   },
   "keywords": [],
   "author": "",
@@ -27,9 +31,7 @@
     "react": "^15.3.0",
     "react-bootstrap": "^0.30.2",
     "react-dom": "^15.3.0",
-    "react-router": "^2.6.1"
-  },
-  "devDependencies": {
+    "react-router": "^2.6.1",
     "babel-cli": "^6.11.4",
     "babel-core": "^6.13.2",
     "babel-loader": "^6.2.4",

@@ -4,7 +4,7 @@ const router = express.Router();
 const User = require('../models/user')
 
 
-router.get('/profiles', (req, res) => {
+router.get('/', (req, res) => {
   User.getProfiles((err, users) => {
     res.status(err ? 400 : 200).send(err || users)
   })
