@@ -1,23 +1,17 @@
 import { EventEmitter } from 'events'
 import AppDispatcher from '../AppDispatcher'
 import UserActions from '../actions/UserActions'
-import RouteActions from '../actions/RouteActions'
 import Constants from '../Constants'
 
-let _profile = null;
+let _profiles = null;
 
-class UserStore extends EventEmitter {
+class ProfileStore extends EventEmitter {
   constructor(){
     super();
     AppDispatcher.register(action =>{
       switch(action.type){
-        case Constants.RECEIVE_PROFILE:
-        _profile = action.profile
-        this.emit('Change')
-        break;
-        case Constants.REMOVE_PROFILE:
-        _profile = null
-        RouteActions.route('/')
+        case Constants.RECEIVE_PROFILES:
+        _profiles = action.profiles
         this.emit('Change')
         break;
       }
@@ -30,9 +24,9 @@ class UserStore extends EventEmitter {
   stopListening(cb){
     this.removeListener('Change', cb)
   }
-  get(){
-    return _profile
+  getAll(){
+    return _profiles
   }
 }
 
-export default new UserStore();
+export default new ProfileStore();

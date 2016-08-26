@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import UserActions from '../actions/UserActions'
+import UserActions from '../../actions/UserActions'
 
 export default class LoginForm extends Component {
   constructor(props){

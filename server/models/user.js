@@ -4,6 +4,7 @@ const JWT_SECRET = '&qwefwda*g(fad*gaera*fdaewrga*a'
 const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt-node')
+const { Schema } = mongoose;
 
 
 const userSchema = new mongoose.Schema({
@@ -11,7 +12,8 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   email: { type: String },
   bio: { type: String },
-  bio: { type: String },
+  friends: { type: Schema.Types.ObjectId, ref: 'User' },
+  messages: { type: Schema.Types.ObjectId, ref: 'Message' },
   pic_url: { type: String, default: 'http://static1.squarespace.com/static/5502fdbee4b03657f7464e5c/550a4b1de4b069a29065f3a1/551b7a90e4b0d5e6433a2bef/1429569820924/unknown.gif?format=300w' }
 })
 
@@ -52,8 +54,6 @@ userSchema.statics.authenticate = function(userObj, cb){
   })
 }
 
-
-
 userSchema.statics.authMiddleware = function(req, res, next){
   let token = req.cookies.authtoken;
   jwt.verify(token, JWT_SECRET, (err, payload) => {
@@ -70,6 +70,17 @@ userSchema.statics.authMiddleware = function(req, res, next){
       next();
     });
   });
+}
+
+userSchema.statics.getProfiles = function(cb){
+  mongoose.model('User')
+    .find({})
+    .select({password: false})
+    .populate('messages friends')
+    .exec((err, users) => {
+      if(err) return cb(err);
+      cb(null, users)
+  })
 }
 
 
